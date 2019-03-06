@@ -16,17 +16,17 @@
  */
 function Sorting(array, comparer, makeCopy, performanceLogging) {
     if(!array) {
-        console.log('Sorting constructor: you have to pass an array as the first argument. Note: now the array has a default value [0]');
+        console.error('Sorting constructor: you have to pass an array as the first argument. Note: now the array has a default value [0]');
         array = [0]
     }
 
     if(!array instanceof Array) {
-        console.log('Sorting constructor: you passed non array type into construnctor. Note: now the array has a default value [0]');
+        console.error('Sorting constructor: you passed non array type into construnctor. Note: now the array has a default value [0]');
         array = [0]
     }
 
     if(array.length === 0) {
-        console.log('Sorting constructor: you passed an empty array into construnctor. Note: now the array has a default value [0]');
+        console.error('Sorting constructor: you passed an empty array into construnctor. Note: now the array has a default value [0]');
         array = [0]
     }
 

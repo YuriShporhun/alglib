@@ -89,7 +89,7 @@ Common.prototype.isEvenArray = function(array) {
 
 Common.prototype.isOddArray = function(array) {
     if(!array instanceof Array) {
-        console.error('Common.isOdArray: you passed not an array');
+        console.error('Common.isOddArray: you passed not an array');
         return;
     }
 
