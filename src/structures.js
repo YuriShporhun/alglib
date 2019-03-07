@@ -1,4 +1,5 @@
 var Stack = require('../src/_structures/_stack.js')
+var Queue = require('../src/_structures/_queue.js')
 
 Structures = {
     /**
@@ -8,6 +9,15 @@ Structures = {
      */
     Stack: function (maxItems, elementType) {
         return new Stack(maxItems, elementType);
+    },
+
+    /**
+     * Represents a queue data structure
+     * @param {number} maxItems Maximum elements in a queue
+     * @param {string} elementType A type of an element you want to use with a queue
+     */
+    Queue: function (maxItems, elementType) {
+        return new Queue(maxItems, elementType);
     }
 }
 

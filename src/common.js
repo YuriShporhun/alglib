@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * 
+ * @param {boolean} disableWarnings 
+ */
 function Common(disableWarnings) { 
     disableWarnings = disableWarnings | false;
     this._disableWarnings = disableWarnings;

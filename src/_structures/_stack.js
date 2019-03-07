@@ -9,9 +9,6 @@ var _Stack = function (maxItems, elementType) {
         'empty'
     ]
 
-    /**
-     * @member {Array}
-     */
     this._stack = [];
 
     if(typeof maxItems !== 'number' && typeof maxItems !== 'undefined') {
@@ -40,6 +37,14 @@ _Stack.prototype.maxItems = function () {
     return this._maxItems;
 }
 
+_Stack.prototype.hint = function () {
+    Console.log('Stack: a structure which implements the last-in-first-out pattern.')
+    console.log('Stack.push: O(1)');
+    console.log('Stack.find: O(n)');
+    console.log('Stack.count: O(1)');
+    console.log('Stack.pop: O(1)');
+    console.log('Stack.top: O(1)');
+}
 
 _Stack.prototype.find = function (object) {
     var customTypeProperty = null;
@@ -91,11 +96,11 @@ _Stack.prototype.any = function() {
     return this._stack.length > 0;
 }
 
-_Stack.prototype.top = function () {
+_Stack.prototype.top = function() {
     return this._stack[this._stack.length - 1];
 }
 
-_Stack.prototype.clear = function () {
+_Stack.prototype.clear = function() {
     this._stack = [];
 }
 
