@@ -67,3 +67,14 @@ describe("Stack.any", function() {
         assert.equal(stack.any(), false);
     });
 });
+
+describe("Stack.contains", function() {
+    it("finds if an element in the container", function() {
+        var stack = new Structures.Stack();
+
+        stack.push('1');
+        var contains = stack.contains('1');
+
+        assert.equal(contains, true);
+    });
+});

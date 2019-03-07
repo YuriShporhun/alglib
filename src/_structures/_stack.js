@@ -1,14 +1,8 @@
 'use strict'
 
-var _Stack = function (maxItems, elementType) {
+var _Stack = function (maxItems, elementType, onOverflow, onEmpty) {
+    var noop = function() { };
     this._alglibtype = 'stack';
-    this._alglibproperties = [
-        'find', 
-        'count',
-        'any',
-        'empty'
-    ]
-
     this._stack = [];
 
     if(typeof maxItems !== 'number' && typeof maxItems !== 'undefined') {
@@ -19,7 +13,7 @@ var _Stack = function (maxItems, elementType) {
     maxItems = maxItems || Number.MAX_VALUE;
 
     if(typeof elementType !== 'string' && typeof elementType !== 'undefined') {
-        console.error('Stack.ctor: you passed wrong typed elementType; Noy it equals "any"');
+        console.error('Stack.ctor: you passed wrong typed elementType; Now it equals "any"');
         elementType = 'any';
     }
 
@@ -27,6 +21,9 @@ var _Stack = function (maxItems, elementType) {
 
     this._maxItems = maxItems;
     this._elementType = elementType;
+
+    this._onOverflow = onOverflow | noop;
+    this._onEmpty = onEmpty | noop;
 }
 
 _Stack.prototype.elementType = function () {
@@ -46,7 +43,7 @@ _Stack.prototype.hint = function () {
     console.log('Stack.top: O(1)');
 }
 
-_Stack.prototype.find = function (object) {
+_Stack.prototype.contains = function (object) {
     var customTypeProperty = null;
     if(object.hasOwnProperty('_alglibtype')) {
         customTypeProperty = object['_alglibtype'];
@@ -57,7 +54,7 @@ _Stack.prototype.find = function (object) {
         return;
     }
 
-    return this._stack.find(object);
+    return this._stack.includes(object);
 }
 
 _Stack.prototype.count = function () {
@@ -75,6 +72,7 @@ _Stack.prototype.push = function (object) {
     }
     if(this.count == this._maxItems) {
         console.error('Stack.push: maximum elements count reached');
+        this._onOverflow(this);
         return;
     }
     this._stack.push(object);
@@ -83,6 +81,7 @@ _Stack.prototype.push = function (object) {
 _Stack.prototype.pop = function() {
     if(this.count === 0) {
         console.error('Stack.pop: you cannot pop an item from an empty stack');
+        this._onEmpty(this);
         return;
     }
     return this._stack.pop();
