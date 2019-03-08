@@ -1,7 +1,6 @@
 'use strict'
 
 /**
- * 
  * @param {boolean} disableWarnings 
  */
 function Common(disableWarnings) { 
@@ -59,6 +58,7 @@ Common.prototype.isOdd = function (number) {
 /**
  * Determines if a number is even
  * @param {Number} number A number
+ * @returns {boolean} Returns true if a number is even and false otherwise
  */
 Common.prototype.isEven = function(number) {
     if(typeof number !== 'number') {
@@ -76,6 +76,10 @@ Common.prototype.isEven = function(number) {
     return false;
 }
 
+/**
+ * Determines if an array contains only even numbers
+ * @param {Array} array An array
+ */
 Common.prototype.isEvenArray = function(array) {
     if(!array instanceof Array) {
         console.error('Common.isEvenArray: you passed not an array')
@@ -83,6 +87,12 @@ Common.prototype.isEvenArray = function(array) {
     }
     var isEven = true;
     for(var i = 0; i < array.length; i++) {
+        if(typeof array[i] !== 'number' && disableWarnings === false) {
+            console.warn('Common.isEvenArray: an item in the array has type ' 
+                + typeof array[i] 
+                + ' instead of "number" and was ignored');
+            continue;
+        }
         if(!this.isEven(array[i])) {
             isEven = false;
             break;
