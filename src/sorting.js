@@ -47,7 +47,7 @@ function Sorting(array, comparer, makeCopy, performanceLogging) {
 }
 
 /**
- * Set the array which will be sorted
+ * @description Set the array which will be sorted
  * @param {Array} array The array which will be sorted
  * @param {boolean} makeCopy Will your array be copied of passed by reference
  */
@@ -61,6 +61,9 @@ Sorting.prototype.setArray = function(array, makeCopy) {
     }
 }
 
+/**
+ * @description Prints a hint about complexity of algorithms
+ */
 Sorting.prototype.hint = function() {
     console.log('Insertion sort: time = O(n^2), memory = O(n), use when you do not have much enough ram, but also your dataset is small');
 }

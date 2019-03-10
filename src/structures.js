@@ -1,5 +1,5 @@
-var Stack = require('../src/_structures/_stack.js')
-var Queue = require('../src/_structures/_queue.js')
+var Stack = require('../src/structures/stack.js')
+var Queue = require('../src/structures/_queue.js')
 
 Structures = {
     /**

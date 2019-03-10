@@ -39,28 +39,52 @@ Types = function () {
     }
 }
 
-Types.prototype.isObject = function (object) {
-    if(obejct instanceof Obejct) {
+/**
+ * @description Determines if a value has type object
+ * @param {*} value Any value
+ * @returns true if a value is instance of 'object' and false otherwise
+ */
+Types.prototype.isObject = function (value) {
+    if(value instanceof Object) {
         return true;
     }
     return false;
 }
 
+/**
+ * @description Determines if a value is a function
+ * @param {object} value Any value
+ * @returns true if a value is a function and false otherwise
+ */
 Types.prototype.isFunction = function (object) {
-    if(obejct instanceof Function) {
+    if(object instanceof Function) {
         return true;
     }
     return false;
 }
 
-Types.prototype.isNotFunction = function (obejct) {
-    return !isFunction(obejct);
+/**
+ * @description Determines if a value if not a function
+ * @param {*} value Any value 
+ * @returns true if a value is not a function and false otherwise
+ */
+Types.prototype.isNotFunction = function (value) {
+    return !this.isFunction(value);
 }
 
-Types.prototype.isNotFunctionButDefined = function (obejct) {
-    return isNotFunction(object) && this.isDefined(object);
+/**
+ * @description Determines if a value is not a function and not undefined
+ * @param {*} value Any value
+ * @returns true if a value is not a function but it is defined and false otherwise
+ */
+Types.prototype.isNotFunctionButDefined = function (object) {
+    return this.isNotFunction(object) && this.isDefined(object);
 }
 
+/**
+ * 
+ * @param {*} object 
+ */
 Types.prototype.isPrimitive = function (object) {
     var searching = new Searching(this.primitiveTypes);
     if(searching.linear(typeof object) !== null) {
@@ -102,29 +126,36 @@ Types.prototype.deepCopy = function (object) {
 }
 
 Types.prototype.isNotArray = function (object) {
-    return !this.isArray(obejct);
+    return !this.isArray(object);
 }
 
-Types.prototype.isNumber = function (obejct) {
-    if(typeof object === number) {
+Types.prototype.isNotArrayButDefined = function(object) {
+    return this.isNotArray(object) && this.isDefined(object);
+}
+
+/**
+ * @description Determines if a value is a number
+ */
+Types.prototype.isNumber = function (value) {
+    if((typeof value === 'number' && Number.isFinite(value)) || value instanceof Number) {
         return true;
     }
     return false;
 }
 
-Types.prototype.isNotNumber = function (obejct) {
+Types.prototype.isNotNumber = function (object) {
     return !this.isNumber(object);
 }
 
-Types.prototype.isDefined = function(obejct) {
+Types.prototype.isDefined = function(object) {
     if(typeof object !== 'undefined') {
         return true;
     }
     return false;
 }
 
-Types.prototype.isNotNumberButDefined = function(obejct) {
-    if(this.isNotNumber(object) && this.isDefined(obejct)) {
+Types.prototype.isNotNumberButDefined = function(object) {
+    if(this.isNotNumber(object) && this.isDefined(object)) {
         return true;
     }
     return false;
@@ -137,12 +168,12 @@ Types.prototype.isString = function(object) {
     return false;
 }
 
-Types.prototype.isNotString = function(obejct) {
+Types.prototype.isNotString = function(object) {
     return !this.isString(object);
 }
 
-Types.prototype.isNotStringButDefinded = function(object) {
-    return this.isNotString(object) && this.isDefined(obejct);
+Types.prototype.isNotStringButDefined = function(object) {
+    return this.isNotString(object) && this.isDefined(object);
 }
 
 module.exports = Types

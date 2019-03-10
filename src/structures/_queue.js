@@ -60,8 +60,9 @@ _Queue.prototype.count = function() {
     return this._tail - this._head;
 }
 
-_Queue.prototype.contains = function() {
+_Queue.prototype.contains = function(object) {
     var tempQueue = this._queue.slice(this._head, this._tail - 1);
+    return tempQueue.includes(object);
 }
 
 module.exports = _Queue

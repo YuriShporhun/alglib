@@ -1,7 +1,11 @@
 'use strict'
 
+var Types = require('./types.js')
+
+var Types = new Types();
+
 /**
- * @param {boolean} disableWarnings 
+ * @param {boolean} disableWarnings If true - warnigns will not be print
  */
 function Common(disableWarnings) { 
     disableWarnings = disableWarnings | false;
@@ -9,7 +13,7 @@ function Common(disableWarnings) {
 }
 
 /**
- * Checks if a number is an integer value
+ * @description Checks if a number is an integer value
  * @param {Number} number A number you want to check 
  * @returns {boolean} true if a number is an integer and false otherwise
  */
@@ -18,7 +22,7 @@ Common.prototype.isInt = function (number) {
 }
 
 /**
- * Checks if a number is a float value
+ * @description Checks if a number is a float value
  * @param {Number} number A number you want to check 
  * @returns {boolean} true if a number is a float and false otherwise
  */
@@ -27,7 +31,7 @@ Common.prototype.isFloat = function (number){
 }
 
 /**
- * Converts a number to an integer
+ * @description Converts a number to an integer
  * @param {Numner} number A number you want to convert to an integer
  * @returns A converted to integer number
  */
@@ -36,8 +40,9 @@ Common.prototype.floatToInt = function(number) {
 }
 
 /**
- * Determines if a number is odd
+ * @description Determines if a number is odd
  * @param {Number} number A number
+ * @returns 
  */
 Common.prototype.isOdd = function (number) {
     if(typeof number !== 'number') {
@@ -56,7 +61,7 @@ Common.prototype.isOdd = function (number) {
 }
 
 /**
- * Determines if a number is even
+ * @description Determines if a number is even
  * @param {Number} number A number
  * @returns {boolean} Returns true if a number is even and false otherwise
  */
@@ -77,15 +82,18 @@ Common.prototype.isEven = function(number) {
 }
 
 /**
- * Determines if an array contains only even numbers
+ * @description Determines if an array contains only even numbers
  * @param {Array} array An array
+ * @returns {boolean} true if an array has only even numbers and false otherwise
  */
 Common.prototype.isEvenArray = function(array) {
     if(!array instanceof Array) {
         console.error('Common.isEvenArray: you passed not an array')
         return;
     }
+
     var isEven = true;
+
     for(var i = 0; i < array.length; i++) {
         if(typeof array[i] !== 'number' && disableWarnings === false) {
             console.warn('Common.isEvenArray: an item in the array has type ' 
@@ -93,6 +101,7 @@ Common.prototype.isEvenArray = function(array) {
                 + ' instead of "number" and was ignored');
             continue;
         }
+
         if(!this.isEven(array[i])) {
             isEven = false;
             break;
@@ -101,6 +110,11 @@ Common.prototype.isEvenArray = function(array) {
     return isEven;
 }
 
+/**
+ * @description Determines if an array contains only odd number
+ * @param {Array} array An array
+ * @returns {boolean} true if an array has only odd numbers and false otherwise
+ */
 Common.prototype.isOddArray = function(array) {
     if(!array instanceof Array) {
         console.error('Common.isOddArray: you passed not an array');
@@ -109,6 +123,13 @@ Common.prototype.isOddArray = function(array) {
 
     var isOdd = true;
     for(var i = 0; i < array.length; i++) {
+        if(typeof array[i] !== 'number' && disableWarnings === false) {
+            console.warn('Common.isOddArray: and item in the array has type '
+                + typeof array[i]
+                + ' istead of "number" as was ignored');
+            continue;
+        }
+
         if(!this.isOdd) {
             isOdd = false;
             break;

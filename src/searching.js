@@ -1,6 +1,6 @@
 'use strict'
 
-var Common = require('./src/common.js')
+var Common = require('./common.js')
 
 function Searching(array) {
     this._array = array;

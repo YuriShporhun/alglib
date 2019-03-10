@@ -8,6 +8,8 @@ describe("Stack.ctor", function() {
         assert.equal(stack.count(), 0);
         assert.equal(stack.elementType(), 'any');
         assert.equal(stack.maxItems(), Number.MAX_VALUE);
+        assert.equal(stack.isFrozen(), false);
+        assert.equal(stack.getExplicitUnfreeze(), false);
     });
 });
 
@@ -64,8 +66,10 @@ describe("Stack.any", function() {
 
     it("checks if a stack has no value", function() {
         var stack = new Structures.Stack();
+
         assert.equal(stack.any(), false);
     });
+
 });
 
 describe("Stack.contains", function() {
