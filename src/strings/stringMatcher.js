@@ -39,6 +39,7 @@ StringMatcher.prototype.linear = function(pattern) {
         for(var j = 0; j < pLength; j++) {
             if(pattern.charAt(j) !== this._string.charAt(i + j)) {
                 found = false;
+                break;
             }
         }
         if(found === true) {
