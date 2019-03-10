@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "perf": "node ./benchmark/stringMatcher.perf.js"
+    "perf.stringMatcher": "node ./benchmark/stringMatcher.perf.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/YuriShporhun/alglib#readme",
   "devDependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "mocha": "^6.0.2"
   }
 }
