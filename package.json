@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha",
+    "perf": "node ./benchmark/stringMatcher.perf.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/YuriShporhun/alglib/issues"
   },
-  "homepage": "https://github.com/YuriShporhun/alglib#readme"
+  "homepage": "https://github.com/YuriShporhun/alglib#readme",
+  "devDependencies": {
+    "benchmark": "^2.1.4"
+  }
 }

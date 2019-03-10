@@ -1,5 +1,3 @@
-var Searching = require('./searching.js')
-
 privates = {
     traverseObject: function(object, copy, typesInstance) {
         for(var key in object) {
@@ -27,7 +25,7 @@ privates = {
             object[key] = value;
             return object[key];
         }
-        console.error('Memory internal error in addProperty() cannot resolve an object type');  
+        console.error('Types internal error in addProperty() cannot resolve an object type');  
     }
 }
 
@@ -86,8 +84,7 @@ Types.prototype.isNotFunctionButDefined = function (object) {
  * @param {*} object 
  */
 Types.prototype.isPrimitive = function (object) {
-    var searching = new Searching(this.primitiveTypes);
-    if(searching.linear(typeof object) !== null) {
+    if(this.primitiveTypes.indexOf(object) !== 1) {
         return true;
     }
     return false;
