@@ -49,7 +49,7 @@ function Sorting(array, comparer, makeCopy, performanceLogging) {
 /**
  * @description Set the array which will be sorted
  * @param {Array} array The array which will be sorted
- * @param {boolean} makeCopy Will your array be copied of passed by reference
+ * @param {boolean} makeCopy Will your array be copied or passed by reference
  */
 Sorting.prototype.setArray = function(array, makeCopy) {
     makeCopy = makeCopy || true;

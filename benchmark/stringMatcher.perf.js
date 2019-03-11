@@ -1,5 +1,4 @@
 var Benchmark = require('benchmark');
-var suite = new Benchmark.Suite;
 var StringMatcher = require('../src/strings/stringMatcher.js')
 
 var fs = require('fs');
@@ -7,22 +6,48 @@ var fs = require('fs');
 var longString = fs.readFileSync( __dirname + '/benchdata/longstring.txt').toString();
 var hugeString = fs.readFileSync( __dirname + '/benchdata/hugestring.txt').toString();
 
-var longLength = new StringMatcher(longString);
-var smallLength = new StringMatcher('abcuuuabcuuuabcuuuabcuuu');
+var smallString = 'abcuuuabcuuuabcuuuabcuuu';
+var mediumLength = new StringMatcher(longString);
+var smallLength = new StringMatcher(smallString);
 var hugeLength = new StringMatcher(hugeString)
 
-suite
-  .add('linear#smalllength < 100 chars              ', function() {
-    smallLength.linear("abc");
-}).add('linear#longlength > 8000 chars; < 9000 chars', function() {
-    longLength.linear("aaa");
-}).add('linear#hugelength ~600000 chars             ', function() {
-    hugeLength.linear("aaa");
+
+var smallLengthSmallPattern = new Benchmark.Suite;
+var mediumLengthSmallPattern = new Benchmark.Suite;
+var hugeLengthSmallPattern = new Benchmark.Suite;
+
+smallLengthSmallPattern
+    .add('linear#smalllength', function() {
+    smallLength.linear("abcu");
+  }).add('kmp#smalllength', function() {
+    smallLength.kmp("abcu");
+  }).add("regex:smalllength", function() {
+    console.log(String(event.target));
+  }).on('complete', function() {
+    console.log('----on small length small pattern is ' + this.filter('fastest').map('name'));
+  })
+.run({ 'async': false });
+
+mediumLengthSmallPattern
+  .add('linear#mediumlength ', function() {
+    mediumLength.linear("aaaa");
+}).add('kmp#mediumlength', function() {
+    mediumLength.kmp("aaaa");
+}).on('cycle', function(event) {
+    console.log(String(event.target));
+}).on('complete', function() {
+    console.log('----on medium length small pattern is ' + this.filter('fastest').map('name'));
 })
-.on('cycle', function(event) {
-console.log(String(event.target));
+.run({ 'async': false });
+
+hugeLengthSmallPattern
+  .add('linear#hugelength', function() {
+    hugeLength.linear("aaauuuaaauuuaaau");
+}).add('kmp#hugelength', function() {
+    hugeLength.kmp("aaauuuaaauuuaaau");
+}).on('cycle', function(event) {
+    console.log(String(event.target));
+}).on('complete', function() {
+    console.log('----on huge length small pattern is' + this.filter('fastest').map('name'));
 })
-.on('complete', function() {
-console.log('Fastest is ' + this.filter('fastest').map('name'));
-})
-.run({ 'async': true });
+.run({ 'async': false });
