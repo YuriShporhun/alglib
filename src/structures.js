@@ -7,8 +7,8 @@ Structures = {
      * @param {number} maxItems Maximum elements in a stack
      * @param {string} elementType A type of an element you want to use with a stack
      */
-    Stack: function (maxItems, elementType) {
-        return new Stack(maxItems, elementType);
+    Stack: function (maxItems, elementType, intitialState, onOverflow, onEmpty) {
+        return new Stack(maxItems, elementType, intitialState, onOverflow, onEmpty);
     },
 
     /**

@@ -21,7 +21,7 @@ smallLengthSmallPattern
     smallLength.linear("abcu");
   }).add('kmp#smalllength', function() {
     smallLength.kmp("abcu");
-  }).add("regex:smalllength", function() {
+  }).on('cycle', function(event) {
     console.log(String(event.target));
   }).on('complete', function() {
     console.log('----on small length small pattern is ' + this.filter('fastest').map('name'));

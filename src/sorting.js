@@ -82,7 +82,7 @@ Sorting.prototype.setComparer = function(comparer) {
  */
 Sorting.prototype.insertion = function () {
     if(this._array.length === 1) {
-        return array;
+        return this._array;
     }
 
     if(this._loggging) {

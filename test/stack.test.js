@@ -81,4 +81,14 @@ describe("Stack.contains", function() {
 
         assert.equal(contains, true);
     });
+
+    it("finds if an element in the frozen container", function() {
+        var stack = new Structures.Stack();
+
+        stack.push(1);
+        stack.freeze();
+        var contains = stack.contains(1);
+
+        assert.equal(contains, true);
+    });
 });

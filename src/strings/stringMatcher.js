@@ -89,11 +89,11 @@ StringMatcher.prototype.linear = function(pattern) {
 }
 
 StringMatcher.prototype.kmp = function(pattern) {
-    var prefixes = privates.prefix(pattern);
-
-    var q = 0;
-    var foundIndexes = [];
-    var n = this._string.length;
+    var prefixes = privates.prefix(pattern),
+        q = 0,
+        foundIndexes = [],
+        n = this._string.length;
+        
     for(var i = 0; i < n; i++) {
         while((pattern.charAt(q) !== this._string.charAt(i)) && q > 0) {
             q = prefixes[q - 1];        

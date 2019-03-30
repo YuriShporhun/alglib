@@ -2,6 +2,8 @@
 
 var Types = require('../types.js')
 var Errors = require('../errors/stack.errors.js')
+var Sorting = require('../sorting.js');
+var Searching = require('../arrays/searching.js')
 
 /**
  * A callback which fires when a stack is overflowed
@@ -65,12 +67,17 @@ var Stack = function (maxItems, elementType, intitialState, onOverflow, onEmpty)
 }
 
 Stack.prototype.freeze = function(explicitUnfreeze) {
-    this.setFrozen(true);
+    this._frozen = true;
     this.setExplicitUnfreeze(explicitUnfreeze || this._explicitUnfreeze);
+    var sorting = new Sorting(this._stack, function(x, y) {
+        return x < y;
+    }, true);
+    this._frozenStack = sorting.insertion();
 }
 
 Stack.prototype.unfreeze = function() {
-    this.setFrozen(false);
+    this._frozen = false;
+    this._frozenStack = []
 }
 
  /**
@@ -99,6 +106,7 @@ Stack.prototype.hint = function () {
     Console.log('Stack: a structure which implements the last-in-first-out pattern.')
     console.log('Stack.push: O(1); changes internal state');
     console.log('Stack.contains: O(n)');
+    console.log('Stack.contains(frozen): O(log n)');
     console.log('Stack.count: O(1)');
     console.log('Stack.pop: O(1); changes internal state');
     console.log('Stack.top: O(1)');
@@ -106,7 +114,7 @@ Stack.prototype.hint = function () {
 
 /**
  * @description Pushes a new object into a stack. Changes the stack internal state.
- * @param {object} object An object whicj will be pushed
+ * @param {object} object An object which will be pushed
  */
 Stack.prototype.push = function (object) {
     if(this._explicitUnfreeze === true) {
@@ -130,6 +138,11 @@ Stack.prototype.push = function (object) {
     this._stack.push(object);
 }
 
+/**
+ * @description Finds if the stack contains an object
+ * @param {object} object An object you want to find
+ * @returns {boolean} true if the stack contains an object, false otherwise
+ */
 Stack.prototype.contains = function (object) {
     var customTypeProperty = null;
     if(object.hasOwnProperty('_alglibtype')) {
@@ -140,8 +153,12 @@ Stack.prototype.contains = function (object) {
         console.error('Stack.contains: you are trying to find wrong object type');
         return;
     }
-
-    return this._stack.indexOf(object) !== -1;
+    if(this.isFrozen() === false) {
+        return this._stack.indexOf(object) !== -1;
+    } else {
+        var searhing = new Searching(this._stack);
+        return searhing.binary(object) === null ? false : true;
+    }
 }
 
 /**
@@ -212,13 +229,6 @@ Stack.prototype.Type = function () {
  */
 Stack.prototype.isFrozen = function() {
     return this._frozen;
-}
-
-/**
- * @description Frozes the stack
- */
-Stack.prototype.freeze = function() {
-    this._frozen = true;
 }
 
 Stack.prototype.getExplicitUnfreeze = function() {

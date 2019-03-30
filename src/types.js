@@ -131,7 +131,7 @@ Types.prototype.isNotArrayButDefined = function(object) {
 }
 
 /**
- * @description Determines if a value is a number
+ * @description Determines if the value is a number
  */
 Types.prototype.isNumber = function (value) {
     if((typeof value === 'number' && Number.isFinite(value)) || value instanceof Number) {
